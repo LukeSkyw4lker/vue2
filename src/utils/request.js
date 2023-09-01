@@ -30,6 +30,7 @@ instance.interceptors.response.use(response=>{
  
 // 封装get方法并导出
 export function get(url,params){
+    
   return instance.get(url,{
     params,
   })

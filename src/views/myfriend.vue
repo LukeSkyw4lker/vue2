@@ -1,28 +1,33 @@
 <template>
   <div>
-    <div class="hot">
-      <div class="img-t">
-        <img class="img1" src="../assets/img/3.1 好友.png" alt="">
-      </div>
-      <div class="hot_x ">
-      <ul>
-        <li>昵称:</li>
-        <li>亲密度:80%</li>
-      </ul>
-     </div>
-    <div class="hot_m">
-        <a href="#" title="社区的服务质量如何？">
-      <h2 class="HotItem-title">社区的服务质量如何？</h2>
-   <p class="HotItem-excerpt">社区服务专业化。一是推行社区项目经理人计划，选调有职业资格、项目运作经验的社区工作者组件社区社会工作服务团队，通过“团队+项目”的形式提高专业化水平，为居民提高专业服务。二是实施政府购买社区服务，购买社会满意度高的长期性服务项目的服务岗位、购买社区服务项目的品牌等，鼓励社区服务机构的市场化经营。三是与社会力量合作，建立专项社区服务基金，搭建多主体参与、多元化筹资的机构项目资金运作、公益创投平台。</p></a>
-   <div class="hot_l">
+    <div v-for="(item, index) in List" :key="index">
+      <div class="hot">
+        <div class="img-t">
+          <img class="img1" src="../assets/img/3.1 好友.png" alt="" />
+        </div>
+        <div class="hot_x">
+          <ul>
+            <li>昵称:{{ item.uname }}</li>
+            <li>账号:{{ item.upass }}</li>
+            <li>亲密度:80%</li>
+          </ul>
+        </div>
+        <div class="hot_m">
+          <a href="#" title="社区的服务质量如何？">
+            <h2 class="HotItem-title">社区的服务质量如何？</h2>
+            <p class="HotItem-excerpt">
+              社区服务专业化。一是推行社区项目经理人计划，选调有职业资格、项目运作经验的社区工作者组件社区社会工作服务团队，通过“团队+项目”的形式提高专业化水平，为居民提高专业服务。二是实施政府购买社区服务，购买社会满意度高的长期性服务项目的服务岗位、购买社区服务项目的品牌等，鼓励社区服务机构的市场化经营。三是与社会力量合作，建立专项社区服务基金，搭建多主体参与、多元化筹资的机构项目资金运作、公益创投平台。
+            </p></a
+          >
+          <div class="hot_l">
             <ul class="hot_ul">
-               <li class="hot_d">点赞</li>
+              <li class="hot_d">点赞</li>
               <li class="hor_f">评论</li>
             </ul>
+          </div>
         </div>
-     </div>  
       </div>
-    <div class="hot">
+      <!-- <div class="hot">
         <div class="img-t">
           <img class="img1" src="../assets/img/3.1 好友.png" alt="">
         </div>
@@ -162,39 +167,48 @@
                         </ul>
                     </div>
                  </div>  
-      </div>
-             
+    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
+import { get } from "../utils/request";
+import axios from "axios";
 export default {
   components: {},
   props: {},
   data() {
     return {
-      imgsrc:'',
-      username:'',
-      title:'',
-      content:'',
-      good:'',
+      imgsrc: "",
+      username: "",
+      title: "",
+      content: "",
+      good: "",
+      List: "",
     };
   },
   watch: {},
+  created() {
+    axios.get("http://localhost:8081/selectuser").then((res) => {
+      // console.log(res.data);
+      this.List = res.data;
+      // console.log(this.List);
+    });
+  },
   computed: {},
   methods: {},
-  created() {},
-  mounted() {}
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>
-.hot{
-  border-bottom: 1px solid rgb(200,200, 200);
-  .img-t{
+.hot {
+  border-bottom: 1px solid rgb(200, 200, 200);
+  .img-t {
     padding-left: 20px;
     width: 60px;
     height: 60px;
-    img{
+    img {
       width: 50px;
       height: 50px;
     }
@@ -205,33 +219,33 @@ export default {
   display: flex;
   outline: none;
   padding: 16px 16px 16px 0;
-  .hot_x{
+  .hot_x {
     width: 150px;
     height: 105px;
     padding: 0;
-    margin:0;
+    margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-synthesis:style;
+    font-synthesis: style;
     font-weight: 600;
     font-size: 14px;
     line-height: 2;
-    margin-left:6px;
-    .li{
+    margin-left: 6px;
+    .li {
       font-size: 13px;
     }
   }
-  .hot_color{
+  .hot_color {
     color: #ff9607;
   }
-  .hot_m{
+  .hot_m {
     position: relative;
     -webkit-box-flex: 1;
     -ms-flex: 1 1;
     flex: 1 1;
     overflow: hidden;
-   }
-   .HotItem-title {
+  }
+  .HotItem-title {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     display: -webkit-box;
@@ -242,50 +256,49 @@ export default {
     max-height: 56px;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-.HotItem-excerpt {
-  line-height: 25px;
-  margin-top: 2px;
-  min-height: 25px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.HotItem-excerpt {
-  color: #444;
-}
-.hot_l{
-  width: 178px;
-  height: 16px;
-  margin:8px 16px;
-  font-size: 14px;
-  height: 16px;
-  -webkit-box-align: center;
+  }
+  .HotItem-excerpt {
+    line-height: 25px;
+    margin-top: 2px;
+    min-height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .HotItem-excerpt {
+    color: #444;
+  }
+  .hot_l {
+    width: 178px;
+    height: 16px;
+    margin: 8px 16px;
+    font-size: 14px;
+    height: 16px;
+    -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
     color: #8590a6;
-    .hot_ul{
+    .hot_ul {
       display: flex;
       justify-content: space-around;
       width: 100px;
       margin-left: 300px;
       cursor: pointer;
-      .hot_d:hover{
+      .hot_d:hover {
         background-color: pink;
       }
-      .hor_f:hover{
+      .hor_f:hover {
         background-color: pink;
       }
     }
-   
-}
-.img-w{
-  padding-left: 10px;
-
-  .img2{
-    height: 105px;
-    width: 190px;
   }
-}
+  .img-w {
+    padding-left: 10px;
+
+    .img2 {
+      height: 105px;
+      width: 190px;
+    }
+  }
 }
 </style>
