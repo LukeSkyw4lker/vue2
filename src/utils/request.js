@@ -4,16 +4,16 @@ let qs = Qs
  
 // 创建axios实例对象
 let instance = axios.create({
-  baseURL:"基础路径",
+  baseURL:"",
   timeout:5000
 })
  
 // 请求拦截器
 instance.interceptors.request.use(config=>{
   // console.log(config,'请求配置项');
-  if(config.url !== '登录接口'){
-    config.headers.Authorization = 'token值'
-  }
+//   if(config.url !== '登录接口'){
+//     config.headers.Authorization = 'token值'
+//   }
   return config
 },error=>{
   alert('请求失败')
@@ -30,10 +30,7 @@ instance.interceptors.response.use(response=>{
  
 // 封装get方法并导出
 export function get(url,params){
-    
-  return instance.get(url,{
-    params,
-  })
+  return instance.get(url,{params})
 }
 // 封装postJSON方法 (发送json格式数据)
 export function postJSON(url,data){

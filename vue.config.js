@@ -9,7 +9,7 @@ module.exports = {
 	//   },
   // },
   devServer: {
-    //配置一个代理
+    //配置一个代理(后跟后端的接口地址)
 	  proxy:'http://localhost:8080',
 
     //配置多个代理

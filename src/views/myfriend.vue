@@ -190,10 +190,13 @@ export default {
   },
   watch: {},
   created() {
-    axios.get("http://localhost:8081/selectuser").then((res) => {
+    get("http://localhost:8081/selectuser").then((res) => {
       // console.log(res.data);
-      this.List = res.data;
+      this.List = res;
       // console.log(this.List);
+    },(err)=>{
+      console.log(err)
+
     });
   },
   computed: {},
