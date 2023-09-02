@@ -88,6 +88,11 @@ const routes = [
     name: '个人动态',
     component: myself
   },
+  {
+    path: '*',
+    name: 'Errorinfo',
+    component: ()=>import('../components/Error.vue')
+  },
 
 ]
 

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import Qs from 'qs'
 let qs = Qs
+import router from '@/router'
  
 // 创建axios实例对象
 let instance = axios.create({
@@ -10,6 +11,7 @@ let instance = axios.create({
  
 // 请求拦截器
 instance.interceptors.request.use(config=>{
+    //let token = getToken()
   // console.log(config,'请求配置项');
 //   if(config.url !== '登录接口'){
 //     config.headers.Authorization = 'token值'

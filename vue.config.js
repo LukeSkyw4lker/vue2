@@ -18,7 +18,8 @@ module.exports = {
     //       target:'http://localhost:5000',
     //       // 重写请求
     //       pathRewrite:{
-    //           '^/api01':''
+    //           '^/api01':'/static/mock'
+            // 请求数据路径别名,这里是注意将static/mock放入public文件夹
     //       }
     //   },
     //   '/api02':{

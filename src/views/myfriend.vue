@@ -175,6 +175,7 @@
 <script>
 import { get } from "../utils/request";
 import axios from "axios";
+import router from "@/router";
 export default {
   components: {},
   props: {},
@@ -191,11 +192,13 @@ export default {
   watch: {},
   created() {
     get("http://localhost:8081/selectuser").then((res) => {
-      // console.log(res.data);
+      // console.log(res);
+      //res即为json数据，响应拦截器已封装好
       this.List = res;
       // console.log(this.List);
     },(err)=>{
       console.log(err)
+      
 
     });
   },
