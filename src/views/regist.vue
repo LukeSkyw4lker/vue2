@@ -4,22 +4,49 @@
       <div class="logo"><img src="../assets/img/logo.png" alt="logo"></div>
       <h1>注册</h1>
     </div>
-    <div class="login_content">
+    <!-- 手机号验证码注册 -->
+    <div v-if="loginFlag" class="login_content">
         <div class="input_act">
             <img class="input_img" src="../assets/img/手机号.png" alt="" />
             <input type="text" class="account" placeholder="请输入手机号">
-            <button class="send_msg">发送验证码</button>
+            <button class="send_msg" @click="loginAuth">{{ auth }}</button>
         </div>
         <div class="input_ps">
           <img class="input_img" src="../assets/img/验证码.png" alt="" />
-          <input type="password" class="password" placeholder="请输入验证码">
+          <input type="text" class="password" placeholder="请输入验证码">
         </div>
-        <button class="bt_login"><router-link to="/MainPage">登录</router-link></button>
+        <button class="bt_login"><router-link to="/MainPage">注册</router-link></button>
         <ul class="extra">
             <li><button @click="changeLogin">{{ loginFlag ? '账号密码注册' : '手机短信注册' }}</button></li>
             <li><router-link to="/login">登录</router-link></li>
         </ul>
-        <li>登录即同意相关协议--<router-link to="/agreement">《登录协议》</router-link></li>
+        <!-- <li>登录即同意相关协议--<router-link to="/agreement">《登录协议》</router-link></li> -->
+    </div>
+    <!-- 账号密码登录 -->
+    <div v-else  class="login_content1">
+      <div class="input_act">
+        <img class="input_img" src="../assets/img/用户-实色.png" alt="" />
+        <input type="text" class="account" placeholder="请输入用户名" />
+      </div>
+      <div class="input_ps">
+        <img class="input_img" src="../assets/img/锁定-实色.png" alt="" />
+        <input :type="text1" class="password" placeholder="请输入密码" />
+        <i @click="changeEasy">
+          <img v-if="easy" src="../assets/img/眼睛.png" alt="">
+          <img v-else src="../assets/img/闭眼睛.png" alt="">
+        </i>
+      </div>
+      <button class="bt_login">
+        <router-link to="/MainPage">注册</router-link>
+      </button>
+      <ul class="extra">
+        <li>
+          <button @click="changeLogin">
+            {{ loginFlag ? "账号密码注册" : "手机短信注册" }}
+          </button>
+        </li>
+        <li><router-link to="/login">登录</router-link></li>
+      </ul>
     </div>
   </div>
 </template>
@@ -244,6 +271,103 @@ export default {
             text-align: center;
             padding-top: 10px;
         }
+    }
+    .login_content1 {
+      border: 1px solid rgb(200, 200, 200);
+      width: fit-content;
+      padding: 10px 60px;
+      height: 300px;
+      background-color: rgb(255, 255, 255, 0.6);
+      border-radius: 10px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      .input_act {
+        background: rgb(255, 255, 255);
+        height: 40px;
+        width: 300px;
+        border: 1px solid rgb(200, 200, 200);
+        /* text-align: center; */
+        border-radius: 15px;
+        margin: 60px 0px 0px 20px;
+        img {
+          width: 30px;
+          margin: 0px 0 0 8px;
+          vertical-align: middle;
+        }
+        input {
+          padding: 5px 5px;
+          width: 200px;
+          height: 30px;
+          border: none;
+          outline: none;
+        }
+      }
+      .input_ps {
+        background: rgb(255, 255, 255);
+        height: 40px;
+        width: 300px;
+        border: 1px solid rgb(200, 200, 200);
+        /* text-align: center; */
+        border-radius: 15px;
+        margin: 20px 0px 0px 20px;
+        img {
+          width: 30px;
+          margin: 0px 0 0 8px;
+          vertical-align: middle;
+        }
+        input {
+          padding: 5px 5px;
+          width: 240px;
+          height: 30px;
+          border: none;
+          outline: none;
+        }
+        i {
+          position: absolute;
+          left: 74%;
+          top: 14vw;
+  
+          img {
+              width: 3vw;
+          }
+        }
+      }
+      .bt_login {
+        text-align: center;
+        margin-top: 20px;
+        background-color: rgb(255, 255, 255, 0.8);
+        width: 80px;
+        height: 30px;
+        font-size: 16px;
+        border-radius: 6px;
+        margin-left: 120px;
+      }
+      .bt_login:hover {
+        background-color: rgb(0, 255, 255, 0.4);
+        cursor: pointer;
+      }
+      .extra {
+        display: flex;
+        padding: 10px 0px;
+        justify-content: space-between;
+        li {
+          font-size: 2px;
+          button {
+            border: none;
+            background: none;
+          }
+          button:hover {
+            cursor: pointer;
+          }
+        }
+      }
+      li {
+        font-size: 2px;
+        text-align: center;
+        padding-top: 10px;
+      }
     }
 }
 </style>
