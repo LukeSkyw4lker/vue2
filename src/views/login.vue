@@ -15,8 +15,8 @@
         </div>
         <button class="bt_login"><router-link to="/MainPage">登录</router-link></button>
         <ul class="extra">
-            <li><input type="checkbox"/><b>记住用户名与密码</b></li>
-            <li><router-link to="/forget">手机号登录</router-link></li>
+            <li><button  @click="changeLogin">{{ loginFlag ? '账号密码注册' : '手机短信注册' }}</button></li>
+            <li><router-link to="/regist">注册</router-link></li>
         </ul>
         <li>登录即同意相关协议--<router-link to="/agreement">《登录协议》</router-link></li>
     </div>
@@ -25,15 +25,94 @@
 
 <script>
 export default {
+  name:"login",
   components: {},
   props: {},
   data() {
-    return {
-    };
-  },
+        return {
+            easy: false,
+            text1: 'password',
+            loginFlag: false,
+            password: '',
+            phone: '',
+            auth: '验证码',
+            authText: '',
+            account: ''
+        }
+    },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+        loginAuth() {
+            if (this.phone) {
+                // console.log();
+                // 设置随机数 Math.random()
+                // Math.floor设置向下取整
+                var str = ''
+                for (let i = 0; i < 4; i++) {
+                    var Ramdom = Math.floor(Math.random() * 10);
+                    str += Ramdom
+                }
+                console.log(str);
+                this.auth = str
+            } else {
+                alert('请输入电话号')
+            }
+        },
+        changeLogin() {
+            this.loginFlag = !this.loginFlag
+        },
+        changeEasy() {
+            this.easy = !this.easy;
+            if (this.easy) {
+                this.text1 = 'text'
+            } else {
+                this.text1 = 'password'
+            }
+        },
+        login() {
+            if (this.loginFlag) {
+                let reg = /^1[3|5|7|8|9]\d{9}$/;
+                // 验证码登录
+                // 验证码登录
+                if (this.auth == this.authText && reg.test(this.phone)) {
+                   post("user/login",{
+                       userPhone:this.phone
+                   }).then(res=>{
+                       if(res.code==200){
+                           alert("登录成功");
+                           localStorage.setItem("login",JSON.stringify(res.data))
+                           this.$router.push({ path: '/' })
+                       }else{
+                           alert(res.msg);
+                       }
+                   })
+                } else {
+                    alert('手机号或者验证码错误')
+                }
+            } else {
+                if (this.account == '' || this.password == '') {
+                    alert('账号密码不能为空')
+                } else {
+                    post("user/login",{
+                       userAccount:this.account,
+                       userPassword:this.password
+                   }).then(res=>{
+                       if(res.code==200){
+                           alert("登录成功");
+                           //JSON.stringify():localstorage存对象时要先把json转换为json字符串
+                           localStorage.setItem("login",JSON.stringify(res.data))
+                           this.$router.push({ path: '/' })
+                       }else{
+                           alert(res.msg);
+                       }
+                   })
+
+                }
+            }
+
+        }
+    },
   created() {},
   mounted() {}
 };
@@ -140,7 +219,15 @@ export default {
             justify-content: space-between;
             li{
                 font-size: 2px;
+                button{
+                  border: none;
+                  background: none;
+                }
+                button:hover{
+                  cursor: pointer;
+                }
             }
+            
         }
         li{
             font-size: 2px;

@@ -2,7 +2,7 @@
   <div class="login_page">
     <div class="login_title">
       <div class="logo"><img src="../assets/img/logo.png" alt="logo"></div>
-      <h1>手机号登录</h1>
+      <h1>注册</h1>
     </div>
     <div class="login_content">
         <div class="input_act">
@@ -16,8 +16,8 @@
         </div>
         <button class="bt_login"><router-link to="/MainPage">登录</router-link></button>
         <ul class="extra">
-            <li><input type="checkbox"/><b>下次自动登录</b></li>
-            <li><router-link to="/forget">登录失败？</router-link></li>
+            <li><button @click="changeLogin">{{ loginFlag ? '账号密码注册' : '手机短信注册' }}</button></li>
+            <li><router-link to="/login">登录</router-link></li>
         </ul>
         <li>登录即同意相关协议--<router-link to="/agreement">《登录协议》</router-link></li>
     </div>
@@ -29,12 +29,89 @@ export default {
   components: {},
   props: {},
   data() {
-    return {
-    };
-  },
+        return {
+            easy: false,
+            text1: 'password',
+            loginFlag: false,
+            password: '',
+            phone: '',
+            auth: '验证码',
+            authText: '',
+            account: ''
+        }
+    },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+        loginAuth() {
+            if (this.phone) {
+                // console.log();
+                // 设置随机数 Math.random()
+                // Math.floor设置向下取整
+                var str = ''
+                for (let i = 0; i < 4; i++) {
+                    var Ramdom = Math.floor(Math.random() * 10);
+                    str += Ramdom
+                }
+                console.log(str);
+                this.auth = str
+            } else {
+                alert('请输入电话号')
+            }
+        },
+        changeLogin() {
+            this.loginFlag = !this.loginFlag
+        },
+        changeEasy() {
+            this.easy = !this.easy;
+            if (this.easy) {
+                this.text1 = 'text'
+            } else {
+                this.text1 = 'password'
+            }
+        },
+        regist() {
+            if (this.loginFlag) {
+                //编写手机号正在表达式
+                //手机号：1开头 第二位：3  5  7 8 9 第三位到11位：普通数字
+                // ^:以什么开头  $:以什么结尾
+                let reg = /^1[3|5|7|8|9]\d{9}$/;
+                // 验证码登录
+                if (this.auth == this.authText && reg.test(this.phone)) {
+                   post("user/regist",{
+                       userPhone:this.phone
+                   }).then(res=>{
+                       if(res.code==200){
+                           alert("注册成功");
+                           this.$router.push({ path: '/login' })
+                       }else{
+                           alert(res.msg);
+                       }
+                   })
+                } else {
+                    alert('手机号或者验证码错误')
+                }
+            } else {
+                if (this.account == '' || this.password == '') {
+                    alert('账号密码不能为空')
+                } else {
+                    post("user/regist",{
+                       userAccount:this.account,
+                       userPassword:this.password
+                   }).then(res=>{
+                       if(res.code==200){
+                           alert("注册成功");
+                           this.$router.push({ path: '/login' })
+                       }else{
+                           alert(res.msg);
+                       }
+                   })
+
+                }
+            }
+
+        }
+    },
   created() {},
   mounted() {}
 };
@@ -153,6 +230,13 @@ export default {
             justify-content: space-between;
             li{
                 font-size: 2px;
+                button{
+                  border: none;
+                  background: none;
+                }
+                button:hover{
+                  cursor: pointer;
+                }
             }
         }
         li{

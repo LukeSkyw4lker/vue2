@@ -4,10 +4,10 @@ import VueRouter from 'vue-router'
 import MainPage from '../views/MainPage.vue'
 import problemw from '../views/problem_w.vue'
 import login from '../views/login.vue'
+import regist from '@/views/regist'
 import find from '../views/find.vue'
 import waitYou from '../views/waitYou.vue'
 import myself from '../views/myself.vue'
-import forget from '../views/forget.vue'
 import agreement from '../views/agreement.vue'
 import video from '../views/video.vue'
 import myfriend from '../views/myfriend.vue'
@@ -59,11 +59,6 @@ const routes = [
     ]
   },
   {
-    path: '/forget',
-    name: '忘记密码',
-    component: forget
-  },
-  {
     path: '/problemw',
     name: '发布问题',
     component: problemw
@@ -72,6 +67,11 @@ const routes = [
     path: '/login',
     name: '登录',
     component: login
+  },
+  {
+    path: '/regist',
+    name: '注册页面',
+    component: regist
   },
   {
     path: '/find',
