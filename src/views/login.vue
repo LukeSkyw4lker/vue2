@@ -29,7 +29,7 @@
         </i>
       </div>
       <button class="bt_login">
-        <router-link to="/MainPage">登录</router-link>
+        <button @click="login" class="login_last">登录</button>
       </button>
       <ul class="extra">
         <li>
@@ -67,7 +67,7 @@
         />
       </div>
       <button class="bt_login">
-        <router-link to="/MainPage">登录</router-link>
+        <button @click="login" class="login_last">登录</button>
       </button>
       <ul class="extra">
         <li>
@@ -87,6 +87,7 @@
 </template>
 
 <script>
+import { get,post } from '@/utils/request';
 export default {
   name: "login",
   components: {},
@@ -107,7 +108,7 @@ export default {
   computed: {},
   methods: {
     loginAuth() {
-      if (true) {
+      if (this.phone) {
         // console.log();
         // 设置随机数 Math.random()
         // Math.floor设置向下取整
@@ -247,6 +248,7 @@ export default {
       /* text-align: center; */
       border-radius: 15px;
       margin: 20px 0px 0px 20px;
+      position: relative;
       img {
         width: 30px;
         margin: 0px 0 0 8px;
@@ -261,11 +263,11 @@ export default {
       }
       i {
         position: absolute;
-        left: 74%;
-        top: 14vw;
+        left: 83%;
+        top: 6px;
 
         img {
-          width: 3vw;
+          width: 27px;
         }
       }
     }
@@ -278,6 +280,10 @@ export default {
       font-size: 16px;
       border-radius: 6px;
       margin-left: 120px;
+      button{
+        border: none;
+        background: none;
+      }
     }
     .bt_login:hover {
       background-color: rgb(0, 255, 255, 0.4);
@@ -378,6 +384,10 @@ export default {
       font-size: 16px;
       border-radius: 6px;
       margin-left: 120px;
+      button{
+        border: none;
+        background: none;
+      }
     }
     .bt_login:hover {
       background-color: rgb(0, 255, 255, 0.4);

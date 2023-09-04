@@ -15,7 +15,7 @@
           <img class="input_img" src="../assets/img/验证码.png" alt="" />
           <input type="text" class="password" placeholder="请输入验证码">
         </div>
-        <button class="bt_login"><router-link to="/MainPage">注册</router-link></button>
+        <button class="bt_login" @click="regist">注册</button>
         <ul class="extra">
             <li><button @click="changeLogin">{{ loginFlag ? '账号密码注册' : '手机短信注册' }}</button></li>
             <li><router-link to="/login">登录</router-link></li>
@@ -36,9 +36,7 @@
           <img v-else src="../assets/img/闭眼睛.png" alt="">
         </i>
       </div>
-      <button class="bt_login">
-        <router-link to="/MainPage">注册</router-link>
-      </button>
+      <button class="bt_login" @click="regist">注册</button>
       <ul class="extra">
         <li>
           <button @click="changeLogin">
@@ -52,6 +50,7 @@
 </template>
 
 <script>
+import { get,post } from '@/utils/request';
 export default {
   components: {},
   props: {},
@@ -312,6 +311,7 @@ export default {
         /* text-align: center; */
         border-radius: 15px;
         margin: 20px 0px 0px 20px;
+        position: relative;
         img {
           width: 30px;
           margin: 0px 0 0 8px;
@@ -326,11 +326,11 @@ export default {
         }
         i {
           position: absolute;
-          left: 74%;
-          top: 14vw;
+          left: 83%;
+          top: 6px;
   
           img {
-              width: 3vw;
+            width: 27px;
           }
         }
       }
