@@ -18,8 +18,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: '登录',
-    component: login
+    name: 'home',
+    component: MainPage,
   },
   {
     path: '/agreement',
@@ -98,6 +98,25 @@ const routes = [
 
 const router = new VueRouter({
   routes
+})
+
+// 路由守卫 ：将路由重新定向
+router.beforeEach((to, from, next) => {
+  // to:即将进入的页面
+  // from :离开时候的路由
+  // next();进入页面必须调用的函数 （）内书写前往的路径 无值为验证时候的路径
+  if(to.path=='/login' || to.path=="/regist"){
+    next()
+  }else{
+     // 需要有登录信息才可以登录getItem获取
+    if (localStorage.getItem('login') != undefined) {
+      // console.log(111);
+      next()
+      // console.log(to.path);
+    } else {
+      next('/login')//输入地址改变前往的位置信息
+    }
+  }
 })
 
 export default router

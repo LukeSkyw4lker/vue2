@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { get,post } from '@/utils/request';
+import { get,post } from '@/utils/http';
 export default {
   name: "login",
   components: {},
@@ -146,7 +146,7 @@ export default {
             if (res.code == 200) {
               alert("登录成功");
               localStorage.setItem("login", JSON.stringify(res.data));
-              this.$router.push({ path: "/" });
+              this.$router.push({ path: "/MainPage" });
             } else {
               alert(res.msg);
             }
@@ -166,7 +166,7 @@ export default {
               alert("登录成功");
               //JSON.stringify():localstorage存对象时要先把json转换为json字符串
               localStorage.setItem("login", JSON.stringify(res.data));
-              this.$router.push({ path: "/" });
+              this.$router.push({ path: "/MainPage" });
             } else {
               alert(res.msg);
             }

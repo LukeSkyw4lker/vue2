@@ -173,7 +173,7 @@
 </template>
 
 <script>
-import { get } from "../utils/request";
+import { get } from "../utils/http";
 import axios from "axios";
 import router from "@/router";
 export default {
@@ -191,7 +191,7 @@ export default {
   },
   watch: {},
   created() {
-    get("http://localhost:8081/selectuser").then((res) => {
+    get("selectuser").then((res) => {
       // console.log(res);
       //res即为json数据，响应拦截器已封装好
       this.List = res;

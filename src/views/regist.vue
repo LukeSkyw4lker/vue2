@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { get,post } from '@/utils/request';
+import { get,post } from '@/utils/http';
 export default {
   components: {},
   props: {},
