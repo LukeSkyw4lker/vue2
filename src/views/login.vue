@@ -37,7 +37,7 @@
             {{ loginFlag ? "账号密码登录" : "手机短信登录" }}
           </button>
         </li>
-        <li><router-link to="/regist">注册</router-link></li>
+        <li><router-link to="/regist">去注册</router-link></li>
       </ul>
       <li>
         登录即同意相关协议--<router-link to="/agreement"
@@ -75,7 +75,7 @@
             {{ loginFlag ? "账号密码登录" : "手机短信登录" }}
           </button>
         </li>
-        <li><router-link to="/regist">注册</router-link></li>
+        <li><router-link to="/regist">去注册</router-link></li>
       </ul>
       <li>
         登录即同意相关协议--<router-link to="/agreement"

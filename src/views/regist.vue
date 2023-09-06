@@ -8,17 +8,17 @@
     <div v-if="loginFlag" class="login_content">
         <div class="input_act">
             <img class="input_img" src="../assets/img/手机号.png" alt="" />
-            <input type="text" class="account" placeholder="请输入手机号">
+            <input v-model="phone" type="text" class="account" placeholder="请输入手机号">
             <button class="send_msg" @click="loginAuth">{{ auth }}</button>
         </div>
         <div class="input_ps">
           <img class="input_img" src="../assets/img/验证码.png" alt="" />
-          <input type="text" class="password" placeholder="请输入验证码">
+          <input v-model="authText" type="text" class="password" placeholder="请输入验证码">
         </div>
         <button class="bt_login" @click="regist">注册</button>
         <ul class="extra">
             <li><button @click="changeLogin">{{ loginFlag ? '账号密码注册' : '手机短信注册' }}</button></li>
-            <li><router-link to="/login">登录</router-link></li>
+            <li><router-link to="/login">去登录</router-link></li>
         </ul>
         <!-- <li>登录即同意相关协议--<router-link to="/agreement">《登录协议》</router-link></li> -->
     </div>
@@ -26,11 +26,11 @@
     <div v-else  class="login_content1">
       <div class="input_act">
         <img class="input_img" src="../assets/img/用户-实色.png" alt="" />
-        <input type="text" class="account" placeholder="请输入用户名" />
+        <input v-model="account" type="text" class="account" placeholder="请输入用户名" />
       </div>
       <div class="input_ps">
         <img class="input_img" src="../assets/img/锁定-实色.png" alt="" />
-        <input :type="text1" class="password" placeholder="请输入密码" />
+        <input v-model="password" :type="text1" class="password" placeholder="请输入密码" />
         <i @click="changeEasy">
           <img v-if="easy" src="../assets/img/眼睛.png" alt="">
           <img v-else src="../assets/img/闭眼睛.png" alt="">
@@ -43,7 +43,7 @@
             {{ loginFlag ? "账号密码注册" : "手机短信注册" }}
           </button>
         </li>
-        <li><router-link to="/login">登录</router-link></li>
+        <li><router-link to="/login">去登录</router-link></li>
       </ul>
     </div>
   </div>

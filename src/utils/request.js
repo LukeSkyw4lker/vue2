@@ -5,7 +5,7 @@ import router from '@/router'
  
 // 创建axios实例对象
 let instance = axios.create({
-  baseURL:"",
+  baseURL:"http://localhost:9527/",
   timeout:5000
 })
  
@@ -39,8 +39,19 @@ export function postJSON(url,data){
   return instance.post(url,data)
 }
 // 封装post方法 (发送表单格式数据)
-export function post(url,data){
-  return instance.post(url,qs.stringify(data))
+// export function post(url,data={}){
+//   return instance.post(url,qs.stringify(data))
+// }
+export function post(url,data={}){
+  return new Promise((resolve,reject) => {
+      axios.post(url,data)
+      .then(response =>{
+          resolve(response.data);
+      })
+      .catch(err =>{
+          reject(err);
+      })
+  });
 }
  
 // 导出axios实例
