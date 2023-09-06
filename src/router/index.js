@@ -9,7 +9,7 @@ import find from '../views/find.vue'
 import waitYou from '../views/waitYou.vue'
 import myself from '../views/myself.vue'
 import agreement from '../views/agreement.vue'
-import video from '../views/video.vue'
+import videos from '../views/videos.vue'
 import myfriend from '../views/myfriend.vue'
 import recommend from '../views/recommend.vue'
 import hot from '../views/hot.vue'
@@ -37,9 +37,9 @@ const routes = [
         component: recommend
       },
       {
-        path: '/video',
+        path: '/videos',
         name: '视频',
-        component: video
+        component: videos
       },
       {
         path: '/myfriend',

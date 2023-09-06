@@ -166,7 +166,7 @@
 <script>
 import headerView from '@/components/headerView'
 export default {
-  name: "video",
+  name: "videos",
   components: { 'v-header': headerView },
 }
 </script>

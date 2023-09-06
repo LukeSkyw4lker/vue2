@@ -16,7 +16,7 @@
               <li><router-link to="/recommend">推荐</router-link></li>
               <li><router-link to="/myfriend">我的好友</router-link></li>
               <li><router-link to="/hot">热度</router-link></li>
-              <li><router-link to="/video">视频</router-link></li>
+              <li><router-link to="/videos">视频</router-link></li>
             </ul>
           </div>
           <router-view></router-view>
