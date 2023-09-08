@@ -60,7 +60,7 @@
                 <!-- <img src="" alt="头像"> -->
                 <div class="head_img"><img src="../assets/img/用户-实色.png" alt="头像"></div>
                 <span class="user_info">
-                  <li>风之旅</li>
+                  <li>{{name}}</li>
                   <li>我的签名</li>
                 </span>
               </div>
@@ -82,16 +82,40 @@
 </template>
 
 <script>
+import { parse } from 'qs';
+import store from '@/store';
+import { get } from '@/utils/http';
+
     export default {
+      //props接收：1、props:['',] 2、props:{name:{type:String},}
+      // props:['nickname'],
       data(){
         return{
           ifshow:false,
           ifshow1:false,
           ifshow2:false,
           ifshow3:false,
+          name:'',
+          // list:''
+          // nickname:JSON.parse(localStorage.getItem("login")).userNickname
         };
       },
+      computed:{
+      },
+      mounted(){ 
+        
+      },
+      created(){
+        this.name=JSON.parse(localStorage.getItem("login")).userNickname
+        // this.$nextTick(()=>{
+        //   this.name=JSON.parse(localStorage.getItem("login")).userNickname
+        // })
+        
+      },
       methods:{
+        get(){
+          
+        },
         showpop(){
           this.ifshow=!this.ifshow;
           setTimeout(()=>{
@@ -243,9 +267,9 @@
             width: 30px;
           }
         }
-        .pop_content{
+        //.pop_content{
 
-        }
+        //}
       }
       .pop_msg1{
         z-index: 99;

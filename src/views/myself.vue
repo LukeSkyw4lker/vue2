@@ -1,13 +1,13 @@
 <template>
     <div class="body">
-        <v-header></v-header>
+        <v-header :nickname="data.userNickname"></v-header>
         <div class="review_box">
             <!-- 1.父元素盒子 -->
             <div class="review_head">
                 <img src="../assets/img/cherry-blossom-tree-1225186_1280.jpg" alt="">
                 <div class="review_icon">
                     <img class="icon_img" src="../assets/img/logo.png" alt="">
-                   <span>你的昵称</span> 
+                   <span>{{ data.userNickname }}</span> 
                 </div>
                 
             </div>
@@ -63,11 +63,12 @@
                 <b>个人资料</b>
                 <button  @click="showpop">修改资料</button>
                 <div class="message">
-                    <div class="user_info"><span>昵称:</span><input type="text" id="username" readonly><br></div>
-                    <div class="user_info"><span>性别：</span> <input type="text" id="sex" readonly><br></div>
-                    <div class="user_info"><span>生日：</span><input type="text" id="birthday" readonly><br></div>
-                    <div class="user_info"><span>房屋住址：</span> <input type="text" id="house" readonly><br></div>
-                    <div class="user_info"><span>籍贯：</span><input type="text" id="location" readonly><br></div>
+                    <div class="user_info"><span>昵称：{{data.userNickname}}</span>
+                    </div>
+                    <div class="user_info"><span>性别：</span></div>
+                    <div class="user_info"><span>生日：</span></div>
+                    <div class="user_info"><span>房屋住址：</span></div>
+                    <div class="user_info"><span>籍贯：</span></div>
                 </div>
                </div>
             </div>
@@ -75,7 +76,7 @@
          <!-- 修改信息弹窗 -->
          <div class="pop_wrapper" v-if="ifshow">
             <div class="message">
-                <div class="user_info"><span>昵称:</span><input type="text" id="username"><br></div>
+                <div class="user_info"><span>昵称：</span><input v-model="nickname" type="text" id="username"><br></div>
                 <div class="user_info"><span>性别：</span> <input type="text" id="sex"><br></div>
                 <div class="user_info"><span>生日：</span><input type="text" id="birthday"><br></div>
                 <div class="user_info"><span>房屋住址：</span> <input type="text" id="house"><br></div>
@@ -83,7 +84,7 @@
             </div>
             <div class="pop_bt">
                 <button @click="showpop">取消修改</button>
-                <button>确认修改</button>
+                <button @click="commit">确认修改</button>
             </div>
         </div>
     </div>
@@ -91,6 +92,7 @@
 
 <script>
     import headerView from '@/components/headerView'
+    import {get,post} from "@/utils/http"
     export default {
         name:"myself",
         components: {'v-header':headerView},
@@ -103,11 +105,39 @@
                 house:"",
                 sex:"",
                 phone:"",
+                // res:JSON.parse(localStorage.getItem("login")),
+                data:[],
+                nickname:"",
             }
+        },
+        created(){
+            let id=JSON.stringify(JSON.parse(localStorage.getItem("login")).userId)
+            get("user/select",{id}).then((res)=>{
+                this.data=res.data
+            })
         },
         methods:{
             showpop(){
                 this.ifshow=!this.ifshow;
+            },
+            commit(){
+                let id=JSON.stringify(JSON.parse(localStorage.getItem("login")).userId)
+                post("user/updata",{
+                    userId:id,
+                    userNickname:this.nickname
+                }).then(res=>{
+                    if(res.code==200){
+                        this.ifshow=!this.ifshow;
+                        alert("修改成功！")
+                        get("user/select",{id}).then((res)=>{
+                            this.data=res.data
+                            localStorage.setItem("login", JSON.stringify(res.data));
+                            this.$router.go(0)
+                        })                       
+                    }else{
+                        alert(res.msg);
+                    }
+                })
             }
         }
     }

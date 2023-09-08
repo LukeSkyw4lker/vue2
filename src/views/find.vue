@@ -124,6 +124,7 @@
 
 <script>
 import headerView from '@/components/headerView'
+import store from '@/store';
 export default {
   name:"find",
   components: {'v-header':headerView},
@@ -137,6 +138,7 @@ export default {
         good:"",
     }
   },
+  computed: {},
   methods:{
     showpop(){
         this.ifshow=!this.ifshow;

@@ -68,6 +68,7 @@
 
 <script>
 import headerView from '@/components/headerView'
+import store from '@/store';
 export default {
   name:"MainPage",
   components: {'v-header':headerView},
@@ -104,14 +105,20 @@ export default {
           id:"震撼我~一整年",
           signature:"峨眉长蹙倾国色，赢得君王醉不归"
         }
-      ]
+      ],
     };
   },
   watch: {},
-  computed: {},
-  methods: {},
-  created() {},
-  mounted() {}
+  computed: {
+  },
+  methods: {
+    
+  },
+  created() {
+  },
+  mounted() {
+    console.log(this.name)
+  }
 };
 </script>
 <style lang="scss" scoped>
