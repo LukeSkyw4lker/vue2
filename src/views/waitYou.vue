@@ -1,7 +1,7 @@
 <template>
   <div class="big-page">
     <div>
-      <v-header></v-header>
+      <v-header :nickname="data.userNickname"></v-header>
     </div>
     <div class="wait_t">
       <ul class="nav_info">
@@ -174,7 +174,11 @@ export default {
   data() {
     return {
       ifshow: false,
+      data:[],
     };
+  },
+  created(){
+    this.data=JSON.parse(localStorage.getItem("login"))
   },
   computed: {},
   methods: {

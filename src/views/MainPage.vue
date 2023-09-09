@@ -3,7 +3,7 @@
 <div class="full_page">
   <div class="main_page">
     <!-- 头部盒子-->
-    <v-header></v-header>
+    <v-header :nickname="data.userNickname"></v-header>
     <!-- 整体内容盒子 -->
     <div class="content">
       <div class="content_wrapper">
@@ -106,15 +106,17 @@ export default {
           signature:"峨眉长蹙倾国色，赢得君王醉不归"
         }
       ],
+      data:[],
     };
+  },
+  created(){
+    this.data=JSON.parse(localStorage.getItem("login"))
   },
   watch: {},
   computed: {
   },
   methods: {
     
-  },
-  created() {
   },
   mounted() {
     console.log(this.name)

@@ -1,7 +1,7 @@
 <template>
     <div class="body">
           <!-- 1.设置背景色 -->
-        <v-header></v-header>
+        <v-header :nickname="data.userNickname"></v-header>
        <div class="content">
         <!-- 2.父元素盒子 -->
         <div class="news_box">
@@ -136,7 +136,11 @@ export default {
         img:"",
         writer:"",
         good:"",
+        data:[]
     }
+  },
+  created(){
+    this.data=JSON.parse(localStorage.getItem("login"))
   },
   computed: {},
   methods:{

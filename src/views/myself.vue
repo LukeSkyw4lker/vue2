@@ -132,7 +132,7 @@
                         get("user/select",{id}).then((res)=>{
                             this.data=res.data
                             localStorage.setItem("login", JSON.stringify(res.data));
-                            this.$router.go(0)
+                            // this.$router.go(0)
                         })                       
                     }else{
                         alert(res.msg);

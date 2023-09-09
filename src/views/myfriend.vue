@@ -197,9 +197,7 @@ export default {
       this.List = res;
       // console.log(this.List);
     },(err)=>{
-      console.log(err)
-      
-
+      console.log(err)   
     });
   },
   computed: {},
