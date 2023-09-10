@@ -3,7 +3,7 @@ import router from '../router'
 
 
 //基础url
-axios.defaults.baseURL = "http://localhost:9527/";
+axios.defaults.baseURL = "http://120.27.235.151:9527/";
 /**
  * 封装get方法
  */
