@@ -1,12 +1,12 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
-  // markdown: {
-  //   // ......
-  //   extendMarkdown: md => {
-  //     md.use(require("./node_modules/.store/markdown-it-disable-url-encode@1.0.1"));
-  //   }
-  // },
+  markdown: {
+    // ......
+    extendMarkdown: md => {
+      md.use(require("./node_modules/.store/markdown-it-disable-url-encode@1.0.1"));
+    }
+  },
 })
 module.exports = {
   // pages: {
@@ -22,7 +22,7 @@ module.exports = {
   // },
   devServer: {
     //配置一个代理(后跟后端的接口地址)
-	  // proxy:'http://localhost:9527',
+	  proxy:'http://localhost:9527',
 
     //配置多个代理
     // proxy:{

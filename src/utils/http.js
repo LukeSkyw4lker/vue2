@@ -4,15 +4,16 @@ import router from '../router'
 
 //基础url
 axios.defaults.baseURL = "http://120.27.235.151:9527/";
-/**
- * 封装get方法
- */
+
 axios.interceptors.request.use({
 
 })
 axios.interceptors.response.use({
     
 })
+/**
+ * 封装get方法
+ */
  export function get(url,params={}){
     return new Promise((resolve,reject) => {
         axios.get(url,{params:params})
